@@ -1,0 +1,50 @@
+@model BrightIdeas.Models.UserPost
+
+<h2><a href="/ideas">Bright Ideas</a></h2>
+<h2><a href="/logout">Logout</a></h2>
+
+<div class="formgroup">
+
+    <table class="table table-bordered">
+
+        <tbody>
+        
+            <tr>
+                <td><a href="/users/@Model.Posts[0].user_id">@Model.Users.SingleOrDefault(z => z.user_id == @Model.Posts[0].user_id).name</a> says: </td>
+                <td>@Model.Posts[0].idea</td>
+
+                    
+                
+            </tr>
+        </tbody>
+    </table>        
+</div>
+
+<h2>People who liked this post:</h2>
+
+<div class="formgroup">
+
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th>Alias</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+            
+
+        <tbody>
+        @foreach(var like in Model.Likes)
+        {
+            <tr>
+                <td><a href="/users/@like.user_id">@Model.Users.SingleOrDefault(t => t.user_id == @like.user_id).alias</a></td>
+                <td>@Model.Users.SingleOrDefault(t => t.user_id == @like.user_id).name</td>
+
+                
+            
+            </tr>
+        }
+        </tbody>
+    </table>        
+</div>

@@ -1,0 +1,89 @@
+@{
+    ViewData["Title"] = "Bright Ideas";
+}
+@model BrightIdeas.Models.UserPost
+
+<div class="container">
+    <div class="headmenu">
+        <h2>Hi @Model.User.name!</h2>
+        <h2><a href="/logout">Logout</a></h2>
+        
+        <h3>@ViewBag.Status</h3>
+        <div class="formgroup">
+            <form asp-action="Add" asp-controller="Post" method="post">
+                
+                <span asp-validation-for="Idea"></span>
+                <input type="text" name="Idea" placeholder="Post something witty here...">
+                <input type="submit" value="Idea!">
+        
+            </form>
+        </div>
+
+    </div>
+    
+    <br>
+    <br>
+    <br>
+    <div class="table">
+        <div class="form_group">
+
+                <table class="table">
+            
+                    <tbody>
+                    @foreach(var post in Model.Posts)
+                    {
+                        if(post == null)
+                        {
+                            <tr>
+                                <td></td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td><a href="users/@post.user_id">@Model.Users.SingleOrDefault(u => u.user_id == @post.user_id).name</a> says: </td>
+                                <td>@post.idea</td>
+            
+                                @if(@post.user_id == @ViewBag.ID)
+                                {
+                                    <td><a href="delete/@post.post_id">Delete</a></td>
+            
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+                            </tr>
+                            <tr>
+            
+                                @if(@post.user_id == @ViewBag.ID || @Model.Likes.Where(z => z.post_id == @post.post_id).SingleOrDefault(t => t.user_id == @ViewBag.ID) != null )
+                                {
+                                    <td></td>
+                                }
+
+
+                                else
+                                {
+                                    <td><a href="likes/@post.post_id">Like</a></td>
+                                }
+                                
+                                <td><a href="likestatus/@post.post_id">@Model.Likes.Where(l => l.post_id == @post.post_id).Count() people</a> like this.</td>
+                        
+                            </tr>
+                            
+                        }
+                        
+                    }
+                    </tbody>
+                </table>        
+            </div>
+
+    </div>
+    
+    
+
+</div>
+
+    
+
+    

@@ -1,0 +1,18 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+<p>@ViewBag.Status</p>
+<div class="container">
+    <div class="container_item: first-child">
+        @Html.Partial("Login")
+
+    </div>
+    
+    <div class="container_item: last-child">
+        @Html.Partial("Register")    
+    </div>
+    
+</div>
+
+
+<hr>

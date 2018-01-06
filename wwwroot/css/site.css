@@ -1,0 +1,6 @@
+/*Write all of your CSS here*/
+.container {
+    display: flex;
+    width: 300px;
+}
+

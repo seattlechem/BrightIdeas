@@ -1,0 +1,16 @@
+@model BrightIdeas.Models.UserPost
+
+<h2><a href="/ideas">Bright Ideas</a></h2>
+<h2><a href="/logout">Logout</a></h2>
+
+<h3>Name: @Model.User.name</h3>
+<h3>Alias: @Model.User.alias</h3>
+<h3>Email: @Model.User.email</h3>
+
+<br>
+<br>
+<hr>
+<br>
+<br>
+<h3>Total Number of Posts: @Model.Posts.Count(p =>p.user_id == @Model.User.user_id)</h3>
+<h3>Total Number of Likes: @Model.Likes.Count(c =>c.user_id == @Model.User.user_id)</h3>
